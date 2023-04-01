@@ -37,16 +37,22 @@ const server = http.createServer(app);
 // server.on('listening', onListening);
 
 mongoose
-  .connect(DB_HOST)
-  // .then(() => console.log('Database connection successful'))
+  .connect(DB_HOST, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Database connection successful'))
   .then(() => server.listen(port))
   .then(() => server.on('listening', onListening))
-  // .then(() => console.log(`Server running. Use our API on port: ${port}`))
+  .then(() => console.log(`Server running. Use our API on port: ${port}`))
   .catch((error) => {
     console.log(error.message);
     server.on('error', onError);
     process.exit(1);
   });
+
+//   const url = process.env.MONGO_URL
+// mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+// .then(() => app.listen(PORT, () => console.log("Server up and running!")
+// .catch((error) => console.log(error.message)
+// mongoose.set('useFindAndModify', false)
 
 /**
  * Normalize a port into a number, string, or false.
