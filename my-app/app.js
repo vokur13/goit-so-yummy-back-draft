@@ -4,9 +4,9 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
+require('dotenv').config();
 const moment = require('moment'); // require
 const fs = require('fs/promises');
-require('dotenv').config();
 
 const contactsRouter = require('./routes/api/recipes');
 
