@@ -38,10 +38,10 @@ const server = http.createServer(app);
 
 mongoose
   .connect(DB_HOST)
-  .then(() => console.log('Database connection successful'))
+  // .then(() => console.log('Database connection successful'))
   .then(() => server.listen(port))
   .then(() => server.on('listening', onListening))
-  .then(() => console.log(`Server running. Use our API on port: ${port}`))
+  // .then(() => console.log(`Server running. Use our API on port: ${port}`))
   .catch((error) => {
     console.log(error.message);
     server.on('error', onError);
