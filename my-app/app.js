@@ -4,10 +4,11 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
+const moment = require('moment'); // require
+const fs = require('fs/promises');
 require('dotenv').config();
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const contactsRouter = require('./routes/api/recipes');
 
 const app = express();
 
@@ -22,12 +23,24 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use(async (req, res, next) => {
+  const { method, url } = req;
+  const date = moment().format();
+  await fs.appendFile(
+    './public/server/server.log',
+    `\n${method} ${url} ${date}`
+  );
+  next();
+});
+
+app.use('/api/recipes', contactsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
+  // res.status(404).json({
+  //   message: 'Not Found',
+  // });
 });
 
 // error handler
@@ -39,6 +52,8 @@ app.use(function (err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+  // const { status = 500, message = 'Server Error' } = err;
+  // res.status(status).json({ message });
 });
 
 module.exports = app;
