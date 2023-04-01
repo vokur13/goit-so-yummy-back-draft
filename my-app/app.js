@@ -6,7 +6,7 @@ const logger = require('morgan');
 const cors = require('cors');
 require('dotenv').config();
 const moment = require('moment'); // require
-const fs = require('fs/promises');
+// const fs = require('fs/promises');
 
 const contactsRouter = require('./routes/api/recipes');
 
@@ -23,15 +23,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(async (req, res, next) => {
-  const { method, url } = req;
-  const date = moment().format();
-  await fs.appendFile(
-    './public/server/server.log',
-    `\n${method} ${url} ${date}`
-  );
-  next();
-});
+// app.use(async (req, res, next) => {
+//   const { method, url } = req;
+//   const date = moment().format();
+//   await fs.appendFile(
+//     './public/server/server.log',
+//     `\n${method} ${url} ${date}`
+//   );
+//   next();
+// });
 
 app.use('/api/recipes', contactsRouter);
 
