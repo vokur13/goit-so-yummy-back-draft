@@ -34,17 +34,6 @@ const add = async (data) => {
   return newRecipe;
 };
 
-// const updateById = async (id, data) => {
-//   const recipes = await getAll();
-//   const index = recipes.findIndex((item) => item.id === id);
-//   if (index === -1) {
-//     return null;
-//   }
-//   recipes[index] = { id, ...data };
-//   await fs.writeFile(recipesPath, JSON.stringify(recipes, null, 2));
-//   return recipes[index];
-// };
-
 const deleteById = async (id) => {
   const recipes = await getAll();
   const index = recipes.findIndex((item) => item.id === id);
