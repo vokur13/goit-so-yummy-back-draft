@@ -3,15 +3,15 @@ const {
   getById,
   add,
   getByCategory,
-  //   updateFavorite,
+  updateFavorites,
   deleteById,
 } = require('./recipes');
 
 module.exports = {
   getAll,
-  // getById,
+  getById,
   add,
-  // getByCategory,
-  //   updateFavorite,
-  // deleteById,
+  getByCategory,
+  updateFavorites,
+  deleteById,
 };

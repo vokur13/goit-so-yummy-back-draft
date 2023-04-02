@@ -2,20 +2,27 @@ const express = require('express');
 
 const ctrl = require('../../controllers');
 
-const { validateBody } = require('../../middleware');
+const { validateBody, isValidId } = require('../../middleware');
 
-const schemas = require('../../schemas');
+const { schemas } = require('../../models/recipe');
 
 const router = express.Router();
 
 router.get('/', ctrl.getAll);
 
-// router.get('/:id', ctrl.getById);
+router.get('/:id', isValidId, ctrl.getById);
 
-// router.get('/category/:alias', ctrl.getByCategory);
+router.get('/category/:alias', ctrl.getByCategory);
 
 router.post('/', validateBody(schemas.addSchema), ctrl.add);
 
-// router.delete('/:id', ctrl.deleteById);
+router.patch(
+  '/:id/favorites',
+  validateBody(schemas.updateFavoriteSchema),
+  isValidId,
+  ctrl.updateFavorites
+);
+
+router.delete('/:id', isValidId, ctrl.deleteById);
 
 module.exports = router;
