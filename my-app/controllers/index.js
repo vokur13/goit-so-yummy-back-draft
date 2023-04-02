@@ -9,9 +9,9 @@ const {
 
 module.exports = {
   getAll,
-  getById,
+  // getById,
   add,
-  getByCategory,
+  // getByCategory,
   //   updateFavorite,
-  deleteById,
+  // deleteById,
 };

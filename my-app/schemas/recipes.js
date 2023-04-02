@@ -8,6 +8,9 @@ const addSchema = Joi.object({
   description: Joi.string(),
   thumb: Joi.string(),
   preview: Joi.string(),
+  time: Joi.string(),
+  popularity: Joi.number(),
+  tags: Joi.string(),
 });
 
 module.exports = { addSchema };
