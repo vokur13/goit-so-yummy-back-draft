@@ -7,6 +7,16 @@ const {
   deleteById,
 } = require('./recipes');
 
+const {
+  register,
+  verifyEmail,
+  resendVerifyEmail,
+  login,
+  getCurrent,
+  logout,
+  updateAvatar,
+} = require('./auth');
+
 module.exports = {
   getAll,
   getById,
@@ -14,4 +24,11 @@ module.exports = {
   getByCategory,
   updateFavorites,
   deleteById,
+  register,
+  // verifyEmail,
+  // resendVerifyEmail,
+  login,
+  // getCurrent,
+  logout,
+  // updateAvatar,
 };

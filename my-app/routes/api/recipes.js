@@ -2,11 +2,13 @@ const express = require('express');
 
 const ctrl = require('../../controllers');
 
-const { validateBody, isValidId } = require('../../middleware');
+const { validateBody, isValidId, authenticate } = require('../../middleware');
 
 const { schemas } = require('../../models/recipe');
 
 const router = express.Router();
+
+router.use(authenticate);
 
 router.get('/', ctrl.getAll);
 

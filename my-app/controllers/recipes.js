@@ -3,6 +3,7 @@ const { Recipe } = require('../models');
 const { HttpError, ctrlWrapper } = require('../helpers/');
 
 const getAll = async (req, res) => {
+  // const { _id: owner } = req.user;
   const { page = 1, limit = 5 } = req.query;
 
   const options = {
@@ -11,9 +12,11 @@ const getAll = async (req, res) => {
   };
 
   const result = await Recipe.paginate(
-    Recipe.find({}).populate(
+    // Recipe.find({owner})
+    Recipe.find(
+      {},
       'title category area time popularity favorites tags'
-    ),
+    ).populate('owner', 'name'),
     options
   );
   res.json(result);
@@ -38,12 +41,15 @@ const getByCategory = async (req, res) => {
 };
 
 const add = async (req, res) => {
-  const result = await Recipe.create(req.body);
+  const { _id: owner } = req.user;
+  const result = await Recipe.create({ ...req.body, owner });
   res.status(201).json(result);
 };
 
 const updateFavorites = async (req, res) => {
+  // const { _id: owner } = req.user;
   const { id } = req.params;
+
   const result = await Recipe.findByIdAndUpdate(id, req.body, { new: true });
   if (!result) {
     throw HttpError(404, 'Not Found');

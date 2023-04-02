@@ -8,6 +8,7 @@ require('dotenv').config();
 // const moment = require('moment'); // require
 // const fs = require('fs/promises');
 
+const authRouter = require('./routes/api/auth');
 const contactsRouter = require('./routes/api/recipes');
 
 const app = express();
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //   next();
 // });
 
+app.use('/api/auth', authRouter);
 app.use('/api/recipes', contactsRouter);
 
 // catch 404 and forward to error handler
