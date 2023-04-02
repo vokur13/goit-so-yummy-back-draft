@@ -16,11 +16,6 @@ const getAll = async (req, res) => {
     ),
     options
   );
-
-  // const result = await Recipe.find(
-  //   {},
-  //   'title category area time populatiry favorites tags'
-  // );
   res.json(result);
 };
 
