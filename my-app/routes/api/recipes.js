@@ -25,7 +25,7 @@ router.patch(
   ctrl.updateFavorites
 );
 
-router.get('/favorites/favorites', ctrl.getAllFavorites);
+router.get('/favorites/favorites', ctrl.getFavorites);
 
 router.delete('/:id', isValidId, ctrl.deleteById);
 

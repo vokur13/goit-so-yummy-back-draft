@@ -71,7 +71,7 @@ const updateFavorites = async (req, res) => {
   res.json({ result });
 };
 
-const getAllFavorites = async (req, res) => {
+const getFavorites = async (req, res) => {
   const { _id: owner } = req.user;
   const { page = 1, limit = 5 } = req.query;
 
@@ -106,6 +106,6 @@ module.exports = {
   getByCategory: ctrlWrapper(getByCategory),
   add: ctrlWrapper(add),
   updateFavorites: ctrlWrapper(updateFavorites),
-  getAllFavorites: ctrlWrapper(getAllFavorites),
+  getFavorites: ctrlWrapper(getFavorites),
   deleteById: ctrlWrapper(deleteById),
 };
