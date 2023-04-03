@@ -47,14 +47,47 @@ const add = async (req, res) => {
 };
 
 const updateFavorites = async (req, res) => {
-  // const { _id: owner } = req.user;
+  const { _id: owner } = req.user;
   const { id } = req.params;
+  const { favorites } = req.query;
 
-  const result = await Recipe.findByIdAndUpdate(id, req.body, { new: true });
+  const result =
+    favorites === 'true'
+      ? await Recipe.findByIdAndUpdate(
+          id,
+          { $addToSet: { favorites: owner } },
+          { new: true }
+        )
+      : await Recipe.findByIdAndUpdate(
+          id,
+          { $pull: { favorites: owner } },
+          { new: true }
+        );
+
   if (!result) {
     throw HttpError(404, 'Not Found');
   }
+
   res.json({ result });
+};
+
+const getAllFavorites = async (req, res) => {
+  const { _id: owner } = req.user;
+  const { page = 1, limit = 5 } = req.query;
+
+  const options = {
+    page,
+    limit,
+  };
+
+  const result = await Recipe.paginate(
+    Recipe.find(
+      { favorites: { $in: [owner] } },
+      'title category area popularity'
+    ).populate(),
+    options
+  );
+  res.json(result);
 };
 
 const deleteById = async (req, res, next) => {
@@ -73,5 +106,6 @@ module.exports = {
   getByCategory: ctrlWrapper(getByCategory),
   add: ctrlWrapper(add),
   updateFavorites: ctrlWrapper(updateFavorites),
+  getAllFavorites: ctrlWrapper(getAllFavorites),
   deleteById: ctrlWrapper(deleteById),
 };

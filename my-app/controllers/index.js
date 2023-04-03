@@ -4,6 +4,7 @@ const {
   add,
   getByCategory,
   updateFavorites,
+  getAllFavorites,
   deleteById,
 } = require('./recipes');
 
@@ -23,6 +24,7 @@ module.exports = {
   add,
   getByCategory,
   updateFavorites,
+  getAllFavorites,
   deleteById,
   register,
   // verifyEmail,

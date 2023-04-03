@@ -36,15 +36,16 @@ const recipeSchema = new Schema(
     preview: { type: String },
     time: { type: String },
     popularity: { type: Number },
+    favorites: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'user',
+      },
+    ],
     // favorites: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: 'user',
-    //   required: true,
+    //   type: Boolean,
+    //   default: false,
     // },
-    favorites: {
-      type: Boolean,
-      default: false,
-    },
     // youtube: String,
     tags: {
       type: String,
@@ -82,14 +83,14 @@ const addSchema = Joi.object({
   preview: Joi.string(),
   time: Joi.string(),
   popularity: Joi.number(),
-  favorites: Joi.boolean(),
+  // favorites: Joi.boolean(),
   tags: Joi.string()
     .valid(...category)
     .required(),
 });
 
 const updateFavoriteSchema = Joi.object({
-  favorites: Joi.boolean().required(),
+  // favorites: Joi.boolean().required(),
 });
 
 const schemas = {

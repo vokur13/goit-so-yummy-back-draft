@@ -25,6 +25,8 @@ router.patch(
   ctrl.updateFavorites
 );
 
+router.get('/favorites/favorites', ctrl.getAllFavorites);
+
 router.delete('/:id', isValidId, ctrl.deleteById);
 
 module.exports = router;

@@ -25,12 +25,12 @@ const userSchema = new Schema(
       minlength: 6,
       required: [true, 'Password is required'],
     },
-    favorites: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'recipe',
-      },
-    ],
+    // favorites: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'recipe',
+    //   },
+    // ],
     token: { type: String, default: '' },
   },
 
