@@ -25,12 +25,12 @@ const userSchema = new Schema(
       minlength: 6,
       required: [true, 'Password is required'],
     },
-    // favorites: [
-    //   {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'recipe',
-    //   },
-    // ],
+    favorites: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'recipe',
+      },
+    ],
     token: { type: String, default: '' },
   },
 
@@ -43,6 +43,7 @@ const registerSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().pattern(emailRegex).required(),
   password: Joi.string().min(6).required(),
+  // favorites: Joi.array(),
 });
 
 // const emailSchema = Joi.object({
